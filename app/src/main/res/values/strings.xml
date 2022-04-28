@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MicroBlogging</string>
+    <string name="title_authors">Authors</string>
 </resources>
