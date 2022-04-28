@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="@dimen/_16sdp"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/author_img_container"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#A19F9F"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_author_com" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/author_name"
+        style="@style/regularText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:layout_constraintStart_toEndOf="@+id/author_img_container"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ahmed Nader" />
+
+    <TextView
+        android:id="@+id/author_username"
+        style="@style/lightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toEndOf="@+id/author_img_container"
+        app:layout_constraintTop_toBottomOf="@+id/author_name"
+        tools:text="\@ahmed" />
+
+    <TextView
+        android:id="@+id/author_email"
+        style="@style/lightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toEndOf="@+id/author_img_container"
+        app:layout_constraintTop_toBottomOf="@+id/author_username"
+        tools:text="\Ahmed@gmail.com" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/header_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="author_email,author_img_container" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintTop_toBottomOf="@id/header_end"
+        android:background="@color/grey" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        tools:listitem="@layout/post_item" />
+</androidx.constraintlayout.widget.ConstraintLayout>

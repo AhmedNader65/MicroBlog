@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shahry.microblogging.adapter.AuthorsAdapter
 import com.shahry.microblogging.databinding.FragmentAuthorsBinding
 import com.shahry.microblogging.model.Author
@@ -36,17 +37,17 @@ class AuthorsFragment : Fragment(), AuthorsAdapter.OnAuthorInteract {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.authorsList.adapter = AuthorsAdapter(getDummyData(),this)
+        binding.authorsList.adapter = AuthorsAdapter(getDummyData(), this)
 
     }
 
     private fun getDummyData(): ArrayList<Author> {
         return arrayListOf<Author>(
-            Author(1,"Ahmed Nader","ahmed",""),
-            Author(1,"Ahmed Nader","ahmed",""),
-            Author(1,"Ahmed Nader","ahmed",""),
-            Author(1,"Ahmed Nader","ahmed",""),
-            Author(1,"Ahmed Nader","ahmed",""),
+            Author(1, "Ahmed Nader", "ahmed", ""),
+            Author(1, "Ahmed Nader", "ahmed", ""),
+            Author(1, "Ahmed Nader", "ahmed", ""),
+            Author(1, "Ahmed Nader", "ahmed", ""),
+            Author(1, "Ahmed Nader", "ahmed", ""),
         )
     }
 
@@ -56,6 +57,6 @@ class AuthorsFragment : Fragment(), AuthorsAdapter.OnAuthorInteract {
     }
 
     override fun onAuthorClick(author: Author) {
-        TODO("Not yet implemented")
+        findNavController().navigate(AuthorsFragmentDirections.actionNavigationAuthorsToPostsFragment())
     }
 }

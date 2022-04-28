@@ -9,5 +9,14 @@
         android:id="@+id/navigation_authors"
         android:name="com.shahry.microblogging.ui.authors.AuthorsFragment"
         android:label="@string/title_authors"
-        tools:layout="@layout/fragment_authors" />
+        tools:layout="@layout/fragment_authors" >
+        <action
+            android:id="@+id/action_navigation_authors_to_postsFragment"
+            app:destination="@id/postsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postsFragment"
+        android:name="com.shahry.microblogging.ui.posts.PostsFragment"
+        android:label="PostsFragment"
+        tools:layout="@layout/fragment_posts" />
 </navigation>

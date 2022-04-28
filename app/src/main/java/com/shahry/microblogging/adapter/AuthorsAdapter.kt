@@ -25,6 +25,9 @@ class AuthorsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val author = mDataList[position]
+        holder.mBinding.root.setOnClickListener {
+            listener.onAuthorClick(author)
+        }
     }
 
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/grey"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        android:padding="@dimen/_16sdp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/post_img_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_130sdp"
+            app:cardCornerRadius="@dimen/_4sdp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_author_com" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/lightText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_img_container"
+            tools:text="2017-01-29" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/boldText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/date"
+            tools:text="Sunt qui voluptas necessitatibus iste explicabo et." />
+
+
+        <TextView
+            android:id="@+id/body"
+            style="@style/regularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="Sunt qui voluptas necessitatibus iste explicabo et." />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
