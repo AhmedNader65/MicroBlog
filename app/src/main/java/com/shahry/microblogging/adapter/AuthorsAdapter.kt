@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shahry.microblogging.databinding.AuthorItemBinding
 import com.shahry.microblogging.model.Author
 
@@ -47,6 +48,7 @@ class AuthorsAdapter(
         fun bind(author: Author) {
             mBinding.authorName.text = author.name
             mBinding.authorUsername.text = author.userName
+            Glide.with(mBinding.root.context).load(author.avatarUrl).into(mBinding.image)
         }
     }
 
