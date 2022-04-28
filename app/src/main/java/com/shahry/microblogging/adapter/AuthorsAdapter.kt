@@ -29,6 +29,7 @@ class AuthorsAdapter(
         holder.mBinding.root.setOnClickListener {
             listener.onAuthorClick(author)
         }
+        holder.bind(author)
     }
 
 
@@ -43,6 +44,10 @@ class AuthorsAdapter(
 
     class ViewHolder(binding: AuthorItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val mBinding = binding
+        fun bind(author: Author) {
+            mBinding.authorName.text = author.name
+            mBinding.authorUsername.text = author.userName
+        }
     }
 
 
