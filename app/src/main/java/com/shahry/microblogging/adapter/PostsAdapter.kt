@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.shahry.microblogging.databinding.PostItemBinding
+import com.shahry.microblogging.model.Author
 import com.shahry.microblogging.model.Post
 
 class PostsAdapter(
-    private var mDataList: ArrayList<Post>,
+    private var mDataList: ArrayList<Post> = arrayListOf(),
 ) :
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
@@ -24,6 +25,11 @@ class PostsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val post = mDataList[position]
+    }
+
+    fun setList(mList: ArrayList<Post>) {
+        mDataList = mList
+        notifyDataSetChanged()
     }
 
 

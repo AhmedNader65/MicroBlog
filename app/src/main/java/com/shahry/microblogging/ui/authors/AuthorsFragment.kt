@@ -91,6 +91,10 @@ class AuthorsFragment : Fragment(), AuthorsAdapter.OnAuthorInteract {
     }
 
     override fun onAuthorClick(author: Author) {
-        findNavController().navigate(AuthorsFragmentDirections.actionNavigationAuthorsToPostsFragment())
+        findNavController().navigate(
+            AuthorsFragmentDirections.actionNavigationAuthorsToPostsFragment(
+                author
+            )
+        )
     }
 }

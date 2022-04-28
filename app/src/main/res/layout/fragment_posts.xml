@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="@dimen/_16sdp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/_16sdp">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -65,13 +65,27 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="author_email,author_img_container" />
 
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000812"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="@dimen/_12ssp" />
+    </FrameLayout>
+
     <View
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@id/header_end"
-        android:background="@color/grey" />
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/header_end" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsList"

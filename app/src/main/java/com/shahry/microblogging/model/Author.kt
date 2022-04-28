@@ -1,3 +1,6 @@
 package com.shahry.microblogging.model
 
-data class Author(val id: Int, val name: String, val userName: String, val avatarUrl: String)
+import java.io.Serializable
+
+data class Author(val id: Int, val name: String, val userName: String, val avatarUrl: String) :
+    Serializable {}

@@ -18,5 +18,9 @@
         android:id="@+id/postsFragment"
         android:name="com.shahry.microblogging.ui.posts.PostsFragment"
         android:label="PostsFragment"
-        tools:layout="@layout/fragment_posts" />
+        tools:layout="@layout/fragment_posts" >
+        <argument
+            android:name="author"
+            app:argType="com.shahry.microblogging.model.Author" />
+    </fragment>
 </navigation>
