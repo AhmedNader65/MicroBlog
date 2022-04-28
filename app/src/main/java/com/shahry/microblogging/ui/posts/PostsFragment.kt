@@ -43,8 +43,9 @@ class PostsFragment : Fragment() {
     ): View {
 
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
         viewModel.fetchAuthorPosts(args.author.id)
-
+        viewModel.author.value = args.author
         return binding.root
     }
 
