@@ -31,13 +31,11 @@ class ServiceModule {
     @Singleton
     @Inject
     fun provideOkHttpClient(
-        @ApplicationContext context: Context,
-        @Named("MockInterceptor") dataInterceptor: Interceptor
+        @ApplicationContext context: Context
     ) = if (BuildConfig.DEBUG) {
         OkHttpClient.Builder()
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
-            .addInterceptor(dataInterceptor)
             .writeTimeout(60, TimeUnit.SECONDS)
             .build()
     } else {

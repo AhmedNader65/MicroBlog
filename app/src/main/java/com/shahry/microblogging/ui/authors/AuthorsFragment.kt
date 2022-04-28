@@ -1,20 +1,32 @@
 package com.shahry.microblogging.ui.authors
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.shahry.microblogging.adapter.AuthorsAdapter
 import com.shahry.microblogging.databinding.FragmentAuthorsBinding
 import com.shahry.microblogging.model.Author
+import com.shahry.microblogging.model.Status
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.ArrayList
 
 
+@AndroidEntryPoint
 class AuthorsFragment : Fragment(), AuthorsAdapter.OnAuthorInteract {
 
+    private lateinit var adapter: AuthorsAdapter
     private var _binding: FragmentAuthorsBinding? = null
     private val viewModel by viewModels<AuthorsViewModel>()
 
@@ -37,18 +49,40 @@ class AuthorsFragment : Fragment(), AuthorsAdapter.OnAuthorInteract {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.authorsList.adapter = AuthorsAdapter(getDummyData(), this)
-
+        adapter = AuthorsAdapter(this)
+        binding.authorsList.adapter = adapter
+        collectData()
     }
 
-    private fun getDummyData(): ArrayList<Author> {
-        return arrayListOf<Author>(
-            Author(1, "Ahmed Nader", "ahmed", ""),
-            Author(1, "Ahmed Nader", "ahmed", ""),
-            Author(1, "Ahmed Nader", "ahmed", ""),
-            Author(1, "Ahmed Nader", "ahmed", ""),
-            Author(1, "Ahmed Nader", "ahmed", ""),
-        )
+    private fun collectData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.authors.collect {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            binding.loading.visibility = View.GONE
+
+                            it.data?.let { authors ->
+                                adapter.setList(authors)
+                            }
+                        }
+                        Status.LOADING -> {
+                            binding.loading.visibility = View.VISIBLE
+                        }
+                        Status.IDLE -> {
+                            binding.loading.visibility = View.GONE
+                        }
+                        Status.ERROR -> {
+                            binding.loading.visibility = View.GONE
+                            it.message?.let { message ->
+                                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -8,8 +8,9 @@ import com.shahry.microblogging.databinding.AuthorItemBinding
 import com.shahry.microblogging.model.Author
 
 class AuthorsAdapter(
-    private var mDataList: ArrayList<Author>,
-    private val listener: OnAuthorInteract
+    private val listener: OnAuthorInteract,
+    private var mDataList: ArrayList<Author> = arrayListOf()
+
 ) :
     RecyclerView.Adapter<AuthorsAdapter.ViewHolder>() {
 
@@ -33,6 +34,11 @@ class AuthorsAdapter(
 
     override fun getItemCount(): Int {
         return mDataList.size
+    }
+
+    fun setList(mList: ArrayList<Author>) {
+        mDataList = mList
+        notifyDataSetChanged()
     }
 
     class ViewHolder(binding: AuthorItemBinding) : RecyclerView.ViewHolder(binding.root) {
