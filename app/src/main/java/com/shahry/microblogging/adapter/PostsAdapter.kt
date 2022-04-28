@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shahry.microblogging.databinding.PostItemBinding
 import com.shahry.microblogging.model.Author
 import com.shahry.microblogging.model.Post
@@ -23,8 +24,8 @@ class PostsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val post = mDataList[position]
+        holder.bind(post)
     }
 
     fun setList(mList: ArrayList<Post>) {
@@ -39,6 +40,12 @@ class PostsAdapter(
 
     class ViewHolder(binding: PostItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val mBinding = binding
+        fun bind(post: Post) {
+            mBinding.title.text = post.title
+            mBinding.body.text = post.body
+            mBinding.date.text = post.date
+            Glide.with(mBinding.root.context).load(post.imageUrl).into(mBinding.image)
+        }
     }
 
 

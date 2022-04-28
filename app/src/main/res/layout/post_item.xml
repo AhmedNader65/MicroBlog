@@ -31,7 +31,7 @@
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_author_com" />
         </com.google.android.material.card.MaterialCardView>
 
