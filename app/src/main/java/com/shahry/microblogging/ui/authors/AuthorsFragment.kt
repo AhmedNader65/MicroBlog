@@ -19,6 +19,7 @@ import com.shahry.microblogging.model.Author
 import com.shahry.microblogging.model.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
@@ -57,29 +58,8 @@ class AuthorsFragment : Fragment(), AuthorsAdapter.OnAuthorInteract {
     private fun collectData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.authors.collect {
-                    when (it.status) {
-                        Status.SUCCESS -> {
-                            binding.loading.visibility = View.GONE
-
-                            it.data?.let { authors ->
-                                adapter.setList(authors)
-                            }
-                        }
-                        Status.LOADING -> {
-                            binding.loading.visibility = View.VISIBLE
-                        }
-                        Status.IDLE -> {
-                            binding.loading.visibility = View.GONE
-                        }
-                        Status.ERROR -> {
-                            binding.loading.visibility = View.GONE
-                            it.message?.let { message ->
-                                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        }
-                    }
+                viewModel.fetchAuthors().collectLatest  {
+                    adapter.submitData(it)
                 }
             }
         }

@@ -13,7 +13,7 @@ class DataRemoteDataSource @Inject constructor(
 
     suspend fun getAuthors(): Resource<ArrayList<Author>> {
         return getResponse(
-            request = { dataApi.getAuthors() },
+            request = { dataApi.getAuthors(1) },
             defaultErrorMessage = "Error fetching data"
         )
     }
@@ -23,7 +23,6 @@ class DataRemoteDataSource @Inject constructor(
             request = { dataApi.getAuthorPosts(authorId) },
             defaultErrorMessage = "Error downloading file"
         )
-
     }
 
 

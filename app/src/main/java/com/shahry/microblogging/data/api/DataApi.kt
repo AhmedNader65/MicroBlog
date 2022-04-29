@@ -9,12 +9,12 @@ interface DataApi {
 
     @GET("authors")
     suspend fun getAuthors(
+        @Query("_page") id: Int
     ): Response<ArrayList<Author>>
 
     @GET("posts")
     suspend fun getAuthorPosts(
         @Query("authorId") id: Int
     ): Response<ArrayList<Post>>
-
 
 }

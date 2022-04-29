@@ -2,6 +2,7 @@ package com.najwa.task.di
 
 import com.shahry.microblogging.data.api.DataApi
 import com.shahry.microblogging.data.dataSource.DataRemoteDataSource
+import com.shahry.microblogging.data.dataSource.PagingDataSource
 import com.shahry.microblogging.data.repository.DataRepository
 import dagger.Module
 import dagger.Provides
@@ -23,7 +24,8 @@ class DataModule {
     @Provides
     @Singleton
     fun provideDataRepository(
+        pagingSource: PagingDataSource,
         dataSource: DataRemoteDataSource,
-    ) = DataRepository(dataSource)
+    ) = DataRepository(pagingSource,dataSource)
 
 }
