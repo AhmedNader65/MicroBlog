@@ -12,40 +12,21 @@ import com.shahry.microblogging.model.Resource
 import com.shahry.microblogging.model.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthorsViewModel @Inject constructor(private val dataRepository: DataRepository) :
     ViewModel() {
-    init {
-        fetchAuthors()
-    }
 
-    private var fetchAuthorsJob: Job? = null
-
-    private val _authors = MutableStateFlow(Resource<ArrayList<Author>>(Status.IDLE, null, null))
-    val authors: StateFlow<Resource<ArrayList<Author>>> = _authors.asStateFlow()
-
+    private lateinit var results: Flow<PagingData<Author>>
 
     fun fetchAuthors(): Flow<PagingData<Author>> {
-        return dataRepository.getAuthors()
-            .map { pagingData ->
-                pagingData.map {
-                    it
-                }
-            }
-            .cachedIn(viewModelScope)
+        if (!this::results.isInitialized)
+            results = dataRepository.getAuthors().cachedIn(viewModelScope)
+        return results
     }
-//    private fun fetchAuthors() {
-//        fetchAuthorsJob?.cancel()
-//        fetchAuthorsJob = viewModelScope.launch {
-//            dataRepository.getAuthors().collect {
-//                if (it != null) {
-//                    _authors.emit(it)
-//                }
-//            }
-//        }
-//    }
 }

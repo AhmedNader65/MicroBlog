@@ -31,11 +31,14 @@ class PostsViewModel @Inject constructor(private val dataRepository: DataReposit
 
 
     fun fetchAuthorPosts(authorId: Int) {
-        fetchAuthorPostsJob?.cancel()
-        fetchAuthorPostsJob = viewModelScope.launch {
-            dataRepository.getPosts(authorId).collect {
-                if (it != null) {
-                    _posts.emit(it)
+        if (_posts.value.status != Status.SUCCESS) {
+
+            fetchAuthorPostsJob?.cancel()
+            fetchAuthorPostsJob = viewModelScope.launch {
+                dataRepository.getPosts(authorId).collect {
+                    if (it != null) {
+                        _posts.emit(it)
+                    }
                 }
             }
         }
